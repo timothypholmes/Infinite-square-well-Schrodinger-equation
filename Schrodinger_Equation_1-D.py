@@ -15,20 +15,16 @@ website: http://timothypholmes.github.io
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
+from matplotlib import animation
+from matplotlib import style
+import seaborn
 import numpy as np
 import pandas as pd
+import warnings
 
-'''
-Global constants
-defined at the bottom
-----------------
-hbar = 6.58211951*10**-16
-x =
-L = x[-1]
-m = int(938000000)#Mass
-num = int(500)
-dt = 2000 #Time step
-'''
+######################################################################
+#Ignore complex casting warning
+warnings.filterwarnings('ignore')
 
 class time_evolution:
     '''
@@ -71,14 +67,13 @@ class time_evolution:
         A = (1/(4*a**2))**(1/4.0)
         self.psi_x0 = A*(np.exp((-(x - x0)**2)
             /(4*a**2))*np.exp(1j*l*x)).reshape(len(x),1)
-        #return psi_x0
         print("psi_x0: " + str(self.psi_x0.shape))
 
 
     def normalize(self):
-        A = ( 1/(np.sqrt(np.trapz((np.conj(self.psi_x0[:,0])
+        self.A = ( 1/(np.sqrt(np.trapz((np.conj(self.psi_x0[:,0])
             *self.psi_x0[:,0]), x[:,0]))))
-        self.psi_x0_normalized = A*self.psi_x0
+        self.psi_x0_normalized = self.A*self.psi_x0
         print("Scalar A: " + str(A))
         print("Psi0 Normalized: " + str(self.psi_x0_normalized.shape))
 
@@ -89,26 +84,23 @@ class time_evolution:
 
 
     def energy_eigenvalues(self):
-        self.En = ( ( np.power(n,2))*(np.pi**2)*(hbar**2))/(2*m*L**2)
+        self.En = ((np.power(n,2)) * (np.pi**2)*(hbar**2))/(2*m*L**2)
         print("En: " + str(self.En.shape))
 
 
-    def C_n(self, quantum_number):
+    def C_n(self):
         self.Cn = np.zeros((quantum_number,1),dtype=complex)
-
         for i in range(0,quantum_number):
 
-            self.Cn[i,0] = np.trapz( (np.conj(self.phi)
-                *self.psi_x0_normalized)[:,i], x[:,0] )
+            self.Cn[i,0] = np.trapz((np.conj(self.phi)
+                * self.psi_x0_normalized)[:,i], x[:,0])
 
         self.Cn = self.Cn.reshape(1,500)
         print("Cn: " + str(self.Cn.shape))
 
 
     def schrodinger_equation(self, total_time):
-
         count = 0
-
         for j in range(0, total_time, dt):
 
             time = j
@@ -117,22 +109,24 @@ class time_evolution:
             for k in range(0, quantum_number):
 
                 self.psi_xt[:,0] = self.psi_xt[:,0] + (self.Cn[0,k]
-                    * self.phi[:,k] * (np.exp((-1j * self.En[0,k]*time)/hbar)))
+                    * self.phi[:,k] * (np.exp((-1j * self.En[0,k] * time)/hbar)))
 
                 count += 1
 
 ######################################################################
 # plot
+    '''
+            style.use('seaborn-dark')
 
             plt.plot(x, np.real(self.psi_xt),'r',
-                label=r'$\mathbb{R} \psi(x,t)$', linewidth = 0.75)
+                label='real' r'$\psi(x,t)$', linewidth = 0.75)
             plt.plot(x, np.imag(self.psi_xt),'b',
-                label=r'$\mathbb{C} \psi(x,t)$', linewidth = 0.75)
+                label=r'$imag \psi(x,t)$', linewidth = 0.75)
             plt.plot(x, np.abs(self.psi_xt),'y',
                 label=r'$|\psi(x,t)|$', linewidth = 0.75)
 
-            x_min = min(self.x[:,0])
-            x_max = max(self.x[:,0])
+            x_min = min(self.x[:,0]-5)
+            x_max = max(self.x[:,0]+5)
             psi_min = -A
             psi_max = A
             plt.xlim((x_min, x_max))
@@ -151,9 +145,7 @@ class time_evolution:
 
         print('The number of iterations: ' + str(count))
 
-######################################################################
-# animate
-
+    '''
 ######################################################################
 #Predefined parameters
 
@@ -164,11 +156,11 @@ x0 = 30
 a = 5
 l = 2
 A = (1/(4*a**2))**(1/4.0)
-m = 1#int(938000000)
+m = 2#int(938000000)
 hbar = 1#6.58211951*10**(-16)
 total_time = 1*10**2
 L = x[-1]
-dt = 10
+dt = 1
 
 ######################################################################
 #Welcome statement
@@ -182,7 +174,7 @@ print('-'*100 + '\n' + 'Analytical solution to the Time-Dependent Schrodinger eq
 
 ########################################################################
 #Inputs for customization
-
+'''
 choose = input('Enter 1 to run or enter any key to customize: ')
 if choose == 1:
     pass
@@ -196,12 +188,79 @@ else:
     dt = int(input('Enter time step: '))
     dx = int(input('Enter length intervals: '))
     x = np.linspace(0,int(length_of_well),int(dx)).astype(complex).reshape(int(dx),1)
+'''
 
-test = time_evolution(hbar,m,quantum_number,total_time,dt,
+Schrodinger = time_evolution(hbar,m,quantum_number,total_time,dt,
 L,x,n,a,l)
-print(test.gaussan_wave_packet(x,x0,l,a))
-test.normalize()
-test.phi_n()
-test.energy_eigenvalues()
-test.C_n(500)
-print(test.schrodinger_equation(total_time))
+
+Schrodinger.gaussan_wave_packet(x,x0,l,a)
+Schrodinger.normalize()
+Schrodinger.phi_n()
+Schrodinger.energy_eigenvalues()
+Schrodinger.C_n()
+#Schrodinger.schrodinger_equation(total_time)
+
+##
+#Set up plot for animation
+
+style.use('seaborn-dark')
+
+fig = plt.figure()
+
+x_min = min(Schrodinger.x[:,0]-5)
+x_max = max(Schrodinger.x[:,0]+5)
+psi_min = Schrodinger.A * (-1)
+psi_max = Schrodinger.A
+xlim = ((x_min, x_max))
+ylim = ((psi_min, psi_max))
+
+ax = fig.add_subplot(111, xlim = xlim, ylim = ylim)
+
+psi_xt_real, = ax.plot([], [], c='r',
+    label='real' r'$\psi(x,t)$', linewidth = 0.75)
+psi_xt_imag, = ax.plot([], [], c='b',
+    label=r'$imag \psi(x,t)$', linewidth = 0.75)
+psi_xt_abs, = ax.plot([], [], c='y',
+    label=r'$|\psi(x,t)|$', linewidth = 0.75)
+left_wall_line = ax.axvline(0, c='k', linewidth=1)
+right_well_line = ax.axvline(x[-1], c='k', linewidth=1)
+
+title = ax.set_title('')
+ax.legend(prop=dict(size=6))
+ax.set_xlabel('$x$')
+ax.set_ylabel(r'$|\psi(x)|$')
+
+######################################################################
+# animate
+
+def init():
+    psi_xt_real.set_data([], [])
+    psi_xt_imag.set_data([], [])
+    psi_xt_abs.set_data([], [])
+    title.set_text('')
+    return psi_xt_real,
+
+def animate(i):
+
+    i = i/50
+    time = np.linspace(0,1000,1000).astype(complex)
+    psi_xt = np.zeros((len(x),1),dtype=complex).reshape(len(x),1)
+
+    for k in range(0, quantum_number):
+
+        psi_xt[:,0] = psi_xt[:,0] + (Schrodinger.Cn[0,k] *
+            Schrodinger.phi[:,k] * (np.exp((-1j *
+                Schrodinger.En[0,k] * i)/hbar)))
+
+        psi_xt_real.set_data(x, np.real(psi_xt))
+        psi_xt_imag.set_data(x, np.imag(psi_xt))
+        psi_xt_abs.set_data(x, np.abs(psi_xt))
+        title.set_text('Time evolution: t = %.2f' %i)
+
+animate = matplotlib.animation.FuncAnimation(fig, animate,
+init_func=init, frames=7200, interval=1, repeat=False)
+
+#animate.save('animation.gif', writer='imagemagick', fps=60, dpi=80)
+animate.save('time_evolution.mp4', fps=120, extra_args=['-vcodec', 'libx264'])
+#plt.show()
+#plt.clf()
