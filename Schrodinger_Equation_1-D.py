@@ -205,7 +205,7 @@ Schrodinger.C_n()
 
 style.use('seaborn-dark')
 
-fig = plt.figure()
+fig = plt.figure(figsize=(20,15))
 
 x_min = min(Schrodinger.x[:,0]-5)
 x_max = max(Schrodinger.x[:,0]+5)
@@ -225,10 +225,12 @@ psi_xt_abs, = ax.plot([], [], c='y',
 left_wall_line = ax.axvline(0, c='k', linewidth=1)
 right_well_line = ax.axvline(x[-1], c='k', linewidth=1)
 
-title = ax.set_title('')
-ax.legend(prop=dict(size=6))
-ax.set_xlabel('$x$')
-ax.set_ylabel(r'$|\psi(x)|$')
+title = ax.set_title('', fontsize=20)
+ax.legend(prop=dict(size=15), loc='upper center', shadow=True, ncol=3)
+ax.set_xlabel('$x$', fontsize=20)
+ax.set_ylabel(r'$|\psi(x)|$', fontsize=20)
+ax.xaxis.set_tick_params(labelsize=20)
+ax.yaxis.set_tick_params(labelsize=20)
 
 ######################################################################
 # animate
@@ -258,8 +260,8 @@ def animate(i):
         title.set_text('Time evolution: t = %.2f' %i)
 
 animate = matplotlib.animation.FuncAnimation(fig, animate,
-init_func=init, frames=7200, interval=1, repeat=False)
-
+init_func=init, frames=57600, interval=1, repeat=False)
+#57600
 #animate.save('animation.gif', writer='imagemagick', fps=60, dpi=80)
 animate.save('time_evolution.mp4', fps=120, extra_args=['-vcodec', 'libx264'])
 #plt.show()
