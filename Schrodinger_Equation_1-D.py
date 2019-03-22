@@ -260,9 +260,9 @@ def animate(i):
         title.set_text('Time evolution: t = %.2f' %i)
 
 animate = matplotlib.animation.FuncAnimation(fig, animate,
-init_func=init, frames=57600, interval=1, repeat=False)
-#57600
+init_func=init, frames=1000, interval=1, repeat=False)
+#uncomment for animation
 #animate.save('animation.gif', writer='imagemagick', fps=60, dpi=80)
-animate.save('time_evolution.mp4', fps=120, extra_args=['-vcodec', 'libx264'])
-#plt.show()
-#plt.clf()
+#animate.save('time_evolution.mp4', fps=120, extra_args=['-vcodec', 'libx264'])
+plt.show()
+plt.clf()
