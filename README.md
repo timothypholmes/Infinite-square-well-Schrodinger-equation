@@ -3,7 +3,7 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 
 ## The theory
 
-$`\sqrt{2}`$ 
+$\sqrt{2}$ 
 
 ### Animation speed up 3000%
 ![time_dependent_3000](https://github.com/timothypholmes/Infinite-square-well-Schrodinger-equation/blob/master/time_dependent_3000.gif)
