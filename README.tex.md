@@ -12,7 +12,7 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
 \begin{equation}
-H \braket{\psi} = i \hbar \frac{d}{dt} \ket{\psi}.
+H \ket{\psi} = i \hbar \frac{d}{dt} \ket{\psi}.
 \end{equation}
 
 When the Schrödinger equation is time-dependent, the solution becomes
@@ -47,13 +47,13 @@ Discrete quantized wave vectors are required to solve the Time-Dependent equatio
 E_n = \frac{n^2\pi^2 \hbar^2}{2mL^2}.
 \end{equation}
 
-Finally, the last item the time dependent Schrödinger equation depends on is $C_n$. $C-n$ is the expansion coefficient that chages the probability amplitude. The indefinite integral of the complex conjugate of eigenstate wave function and the initial wave function with respect to the spatial dimension x,
+Finally, the last item the time dependent Schrödinger equation depends on is $C_n$. $C_n$ is the expansion coefficient that chages the probability amplitude. The indefinite integral of the complex conjugate of eigenstate wave function and the initial wave function with respect to the spatial dimension x,
 
 \begin{equation} \tag{7}
 c_n = \int_{-\infty}^{\infty} \varphi_n(x)^{*} \psi(x,0) dx.
 \end{equation}
 
-From equation (2): we bring together, $\varphi_n(x)$, $E_n$, and $c_n$. The result is
+From equation (2): we bring together, $\varphi_n(x)$, $E_n$, and $C_n$. The result is
 
 \begin{equation} \tag{8}
 \psi(x,t) = \sum_{n}^{500} c_{n} e^{-iE_nt/\hbar}\varphi_{n}(x).
