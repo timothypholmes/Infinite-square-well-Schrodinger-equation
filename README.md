@@ -7,14 +7,15 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 ## The Theory
 
 \usepackage{physics}
+\usepackage{math}
 
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
-<p align="center"><img src="/tex/55b665eff6d26d644801058777795c57.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
+<p align="center"><img src="/tex/5c14e8087f2998080ef3066c33516546.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
 
 When the Schrödinger equation is time-dependent, the solution becomes
 
-<p align="center"><img src="/tex/3436aa1412a9f1263c8cf53cb314561e.svg?invert_in_darkmode&sanitize=true" align=middle width=437.2538907pt height=19.526994300000002pt/></p>
+<p align="center"><img src="/tex/b3c131465e47f65a04cdbba4618830d6.svg?invert_in_darkmode&sanitize=true" align=middle width=437.2538907pt height=19.526994300000002pt/></p>
 
 Therefore, when <img src="/tex/477a717e18587a5e8605780ca167c322.svg?invert_in_darkmode&sanitize=true" align=middle width=36.07293689999999pt height=21.18721440000001pt/> and <img src="/tex/08fbd8ec77aff96736a2f25a1ea90009.svg?invert_in_darkmode&sanitize=true" align=middle width=32.30223149999999pt height=24.65753399999998pt/> becomes
 
