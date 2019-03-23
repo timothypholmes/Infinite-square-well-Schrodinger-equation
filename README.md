@@ -11,7 +11,7 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
-<p align="center"><img src="/tex/5c14e8087f2998080ef3066c33516546.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
+<p align="center"><img src="/tex/c9a946c8bfac73bdb12c1b28d8e7b2cf.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
 
 When the Schrödinger equation is time-dependent, the solution becomes
 
@@ -37,11 +37,11 @@ Discrete quantized wave vectors are required to solve the Time-Dependent equatio
 
 <p align="center"><img src="/tex/5137ab43bcf995f135e95d16030cd018.svg?invert_in_darkmode&sanitize=true" align=middle width=401.30865719999997pt height=35.77743345pt/></p>
 
-Finally, the last item the time dependent Schrödinger equation depends on is <img src="/tex/269df1b24837e284ec791de3ae768620.svg?invert_in_darkmode&sanitize=true" align=middle width=19.87487204999999pt height=22.465723500000017pt/>. <img src="/tex/86d578c943ecac4e464bf04be86c4b7b.svg?invert_in_darkmode&sanitize=true" align=middle width=42.882704699999984pt height=22.465723500000017pt/> is the expansion coefficient that chages the probability amplitude. The indefinite integral of the complex conjugate of eigenstate wave function and the initial wave function with respect to the spatial dimension x,
+Finally, the last item the time dependent Schrödinger equation depends on is <img src="/tex/269df1b24837e284ec791de3ae768620.svg?invert_in_darkmode&sanitize=true" align=middle width=19.87487204999999pt height=22.465723500000017pt/>. <img src="/tex/269df1b24837e284ec791de3ae768620.svg?invert_in_darkmode&sanitize=true" align=middle width=19.87487204999999pt height=22.465723500000017pt/> is the expansion coefficient that chages the probability amplitude. The indefinite integral of the complex conjugate of eigenstate wave function and the initial wave function with respect to the spatial dimension x,
 
 <p align="center"><img src="/tex/e1029eb34bf62c4dddc9afd0446de1a1.svg?invert_in_darkmode&sanitize=true" align=middle width=447.64274279999995pt height=39.61228755pt/></p>
 
-From equation (2): we bring together, <img src="/tex/fb02ec93ec494888822d01225b9c0ccc.svg?invert_in_darkmode&sanitize=true" align=middle width=41.881791599999985pt height=24.65753399999998pt/>, <img src="/tex/c01241b79d48a987aa4a4fbc5b05808a.svg?invert_in_darkmode&sanitize=true" align=middle width=20.26074269999999pt height=22.465723500000017pt/>, and <img src="/tex/fe6a8e7ea5ac601d9dd986902ca41d13.svg?invert_in_darkmode&sanitize=true" align=middle width=15.239827349999992pt height=14.15524440000002pt/>. The result is
+From equation (2): we bring together, <img src="/tex/fb02ec93ec494888822d01225b9c0ccc.svg?invert_in_darkmode&sanitize=true" align=middle width=41.881791599999985pt height=24.65753399999998pt/>, <img src="/tex/c01241b79d48a987aa4a4fbc5b05808a.svg?invert_in_darkmode&sanitize=true" align=middle width=20.26074269999999pt height=22.465723500000017pt/>, and <img src="/tex/269df1b24837e284ec791de3ae768620.svg?invert_in_darkmode&sanitize=true" align=middle width=19.87487204999999pt height=22.465723500000017pt/>. The result is
 
 <p align="center"><img src="/tex/2d2f45898a11473985f46107d71927e9.svg?invert_in_darkmode&sanitize=true" align=middle width=459.00117614999994pt height=46.867754999999995pt/></p>
 
