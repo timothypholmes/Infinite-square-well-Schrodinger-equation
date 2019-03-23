@@ -12,7 +12,7 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
 \begin{equation}
-H \ket{\psi} = i \hbar \frac{d}{dt} \ket{\psi}.
+\ket{\psi} = i \hbar \frac{d}{dt} \ket{\psi}.
 \end{equation}
 
 When the Schrödinger equation is time-dependent, the solution becomes
