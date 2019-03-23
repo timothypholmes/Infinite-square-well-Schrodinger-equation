@@ -7,16 +7,17 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 ## The Theory
 
 \usepackage{physics}
+\usepackage{math}
 
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
 \begin{equation}
-H \braket{\psi} = i\hbar \frac{d}{dt} \ket{\psi}.
+H \braket{\psi} = i \hbar \frac{d}{dt} \ket{\psi}.
 \end{equation}
 
 When the Schrödinger equation is time-dependent, the solution becomes
 
-\begin{equation}
+\begin{equation} \tag{2}
 \ket{\psi(t)} = \Sigma_n C_{n}e^{-iE_{n}/\hbar} \ket{E_n}.
 \end{equation}
 
