@@ -6,9 +6,11 @@ Analytical solution to the Time-Dependent Schrodinger equation for a particle in
 
 ## The Theory
 
+\usepackage{physics}
+
 Solving energy eigenvalues and eigenstates are used to understand the future of a physical system in quantum mechanics. The Schrödinger equation is the tool that allows for time evolution where the equation is,
 
-<p align="center"><img src="/tex/d84c8f8ee4e3aa8882761665bdb2ee09.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
+<p align="center"><img src="/tex/55b665eff6d26d644801058777795c57.svg?invert_in_darkmode&sanitize=true" align=middle width=398.66734710000003pt height=33.81208709999999pt/></p>
 
 When the Schrödinger equation is time-dependent, the solution becomes
 
@@ -46,3 +48,5 @@ Now, as t increase the future of wave equation is determined as shown below in t
 
 ### Animation real time
 ![time_evolution](https://github.com/timothypholmes/Infinite-square-well-Schrodinger-equation/blob/master/time_evolution.gif)
+
+### The Code
