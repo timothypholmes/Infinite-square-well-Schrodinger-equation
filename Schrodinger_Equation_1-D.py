@@ -8,6 +8,8 @@ author: Timothy Holmes
 email: tpholmes7@gmail.com
 website: http://timothypholmes.github.io
 
+Still working to finish a few minor user friendly features. Please update how
+would like.
 '''
 
 ######################################################################
@@ -32,8 +34,8 @@ class time_evolution:
     equation for an unbounded particle in an infinite square well and
     generates a gaussian wave function for the psi initial.
     '''
-    def __init__(self,hbar,m,quantum_number,total_time,dt,
-    L,x,n,a,l):
+    def __init__(self, hbar, m, quantum_number, total_time, dt,
+        L, x, n, a, l):
         self.hbar = hbar
         self.mass = m
         self.quantum_number = quantum_number
@@ -115,7 +117,7 @@ class time_evolution:
 
 ######################################################################
 # plot
-    '''
+
             style.use('seaborn-dark')
 
             plt.plot(x, np.real(self.psi_xt),'r',
@@ -145,7 +147,7 @@ class time_evolution:
 
         print('The number of iterations: ' + str(count))
 
-    '''
+
 ######################################################################
 #Predefined parameters
 
@@ -171,12 +173,14 @@ print('-'*100 + '\n' + 'Analytical solution to the Time-Dependent Schrodinger eq
 'email: tpholmes7@gmail.com \n' +
 'website: http://timothypholmes.github.io \n \n' +
 '-'*100)
+print('Note: change frames in animate for length of recording')
 
 ########################################################################
 #Inputs for customization
-'''
-choose = input('Enter 1 to run or enter any key to customize: ')
-if choose == 1:
+
+choose_custom = int(input('Enter 1 to run or enter any key to customize: '))
+
+if choose_custom  == int(1):
     pass
 else:
     quantum_number = int(input('Quantum number: '))
@@ -187,82 +191,109 @@ else:
     total_time = int(input('Total run time: '))
     dt = int(input('Enter time step: '))
     dx = int(input('Enter length intervals: '))
-    x = np.linspace(0,int(length_of_well),int(dx)).astype(complex).reshape(int(dx),1)
-'''
+    x = np.linspace(0,int(length_of_well),
+        int(dx)).astype(complex).reshape(int(dx),1)
+
+#########################################################################
+#Run class
+
+choose_run= int(input('Enter 1 to run for loop or any key to \n'
+    'run animation for recording: '))
 
 Schrodinger = time_evolution(hbar,m,quantum_number,total_time,dt,
 L,x,n,a,l)
 
-Schrodinger.gaussan_wave_packet(x,x0,l,a)
-Schrodinger.normalize()
-Schrodinger.phi_n()
-Schrodinger.energy_eigenvalues()
-Schrodinger.C_n()
-#Schrodinger.schrodinger_equation(total_time)
+if choose_run  == int(1):
 
-##
-#Set up plot for animation
+    Schrodinger.gaussan_wave_packet(x,x0,l,a)
+    Schrodinger.normalize()
+    Schrodinger.phi_n()
+    Schrodinger.energy_eigenvalues()
+    Schrodinger.C_n()
+    Schrodinger.schrodinger_equation(total_time)
 
-style.use('seaborn-dark')
-
-fig = plt.figure(figsize=(20,15))
-
-x_min = min(Schrodinger.x[:,0]-5)
-x_max = max(Schrodinger.x[:,0]+5)
-psi_min = Schrodinger.A * (-1)
-psi_max = Schrodinger.A
-xlim = ((x_min, x_max))
-ylim = ((psi_min, psi_max))
-
-ax = fig.add_subplot(111, xlim = xlim, ylim = ylim)
-
-psi_xt_real, = ax.plot([], [], c='r',
-    label='real' r'$\psi(x,t)$', linewidth = 0.75)
-psi_xt_imag, = ax.plot([], [], c='b',
-    label=r'$imag \psi(x,t)$', linewidth = 0.75)
-psi_xt_abs, = ax.plot([], [], c='y',
-    label=r'$|\psi(x,t)|$', linewidth = 0.75)
-left_wall_line = ax.axvline(0, c='k', linewidth=1)
-right_well_line = ax.axvline(x[-1], c='k', linewidth=1)
-
-title = ax.set_title('', fontsize=20)
-ax.legend(prop=dict(size=15), loc='upper center', shadow=True, ncol=3)
-ax.set_xlabel('$x$', fontsize=20)
-ax.set_ylabel(r'$|\psi(x)|$', fontsize=20)
-ax.xaxis.set_tick_params(labelsize=20)
-ax.yaxis.set_tick_params(labelsize=20)
-
+elif choose_run  == int(2):
 ######################################################################
 # animate
 
-def init():
-    psi_xt_real.set_data([], [])
-    psi_xt_imag.set_data([], [])
-    psi_xt_abs.set_data([], [])
-    title.set_text('')
-    return psi_xt_real,
+    Schrodinger.gaussan_wave_packet(x,x0,l,a)
+    Schrodinger.normalize()
+    Schrodinger.phi_n()
+    Schrodinger.energy_eigenvalues()
+    Schrodinger.C_n()
 
-def animate(i):
+    style.use('seaborn-dark')
 
-    i = i/50
-    time = np.linspace(0,1000,1000).astype(complex)
-    psi_xt = np.zeros((len(x),1),dtype=complex).reshape(len(x),1)
+    fig = plt.figure(figsize=(20,15))
 
-    for k in range(0, quantum_number):
+    x_min = min(Schrodinger.x[:,0]-5)
+    x_max = max(Schrodinger.x[:,0]+5)
+    psi_min = A * (-1)
+    psi_max = A
+    xlim = ((x_min, x_max))
+    ylim = ((psi_min, psi_max))
 
-        psi_xt[:,0] = psi_xt[:,0] + (Schrodinger.Cn[0,k] *
-            Schrodinger.phi[:,k] * (np.exp((-1j *
-                Schrodinger.En[0,k] * i)/hbar)))
+    ax = fig.add_subplot(111, xlim = xlim, ylim = ylim)
 
-        psi_xt_real.set_data(x, np.real(psi_xt))
-        psi_xt_imag.set_data(x, np.imag(psi_xt))
-        psi_xt_abs.set_data(x, np.abs(psi_xt))
-        title.set_text('Time evolution: t = %.2f' %i)
+    psi_xt_real, = ax.plot([], [], c='r',
+            label='real' r'$\psi(x,t)$', linewidth = 0.75)
+    psi_xt_imag, = ax.plot([], [], c='b',
+            label=r'$imag \psi(x,t)$', linewidth = 0.75)
+    psi_xt_abs, = ax.plot([], [], c='y',
+            label=r'$|\psi(x,t)|$', linewidth = 0.75)
+    left_wall_line = ax.axvline(0, c='k', linewidth=1)
+    right_well_line = ax.axvline(x[-1], c='k', linewidth=1)
 
-animate = matplotlib.animation.FuncAnimation(fig, animate,
-init_func=init, frames=1000, interval=1, repeat=False)
-#uncomment for animation
-#animate.save('animation.gif', writer='imagemagick', fps=60, dpi=80)
-#animate.save('time_evolution.mp4', fps=120, extra_args=['-vcodec', 'libx264'])
-plt.show()
-plt.clf()
+    title = ax.set_title('', fontsize=20)
+    ax.legend(prop=dict(size=15), loc='upper center', shadow=True, ncol=3)
+    ax.set_xlabel('$x$', fontsize=20)
+    ax.set_ylabel(r'$|\psi(x)|$', fontsize=20)
+    ax.xaxis.set_tick_params(labelsize=20)
+    ax.yaxis.set_tick_params(labelsize=20)
+
+    i = np.zeros([])
+
+    def init():
+        psi_xt_real.set_data([], [])
+        psi_xt_imag.set_data([], [])
+        psi_xt_abs.set_data([], [])
+        title.set_text('')
+        return psi_xt_real,
+
+    def animate(i):
+
+        i = i/50
+        time = np.linspace(0,1000,1000).astype(complex)
+        psi_xt = np.zeros((len(x),1),dtype=complex).reshape(len(x),1)
+
+        for k in range(0, quantum_number):
+
+            psi_xt[:,0] = psi_xt[:,0] + (Schrodinger.Cn[0,k] *
+                Schrodinger.phi[:,k] * (np.exp((-1j *
+                    Schrodinger.En[0,k] * i)/hbar)))
+
+            psi_xt_real.set_data(x, np.real(psi_xt))
+            psi_xt_imag.set_data(x, np.imag(psi_xt))
+            psi_xt_abs.set_data(x, np.abs(psi_xt))
+            title.set_text('Time evolution: t = %.2f' %i)
+
+        record = str(input('Do you want to record? Enter y or n: '))
+
+        if record == 'y':
+
+            animate = matplotlib.animation.FuncAnimation(fig, animate,
+            init_func=init, frames=1000, interval=1, repeat=False)
+
+            animate.save('animation.gif',
+                writer='imagemagick', fps=60, dpi=80)
+            animate.save('time_evolution.mp4', fps=120,
+                extra_args=['-vcodec', 'libx264'])
+
+        else:
+
+            plt.show()
+            plt.clf()
+
+    if __name__ == '__main__':
+        init()
+        animate(i)
